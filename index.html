@@ -35,13 +35,28 @@
         .option-group label { font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 5px; text-align: left; }
         .player-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .player-button, #lesson-select, #start-game-btn { background-color: var(--button-bg); border: none; border-radius: var(--border-radius-md); padding: 12px 15px; font-size: 1.2rem; font-weight: 500; color: var(--text-color); cursor: pointer; transition: all 0.2s ease; box-shadow: var(--button-shadow); text-align: center; }
-        .player-button:hover, #lesson-select:hover, #start-game-btn:not(:disabled):hover { background-color: var(--button-hover-bg); transform: translateY(-1px); box-shadow: 0 4px #cdd3db; }
+        
+        /* ---------- DEĞİŞİKLİK BURADA BAŞLIYOR ---------- */
+        /* Orijinal kural ikiye bölündü */
+        
+        /* Kural 1: Oyuncu ve ders seçimi butonlarının hover'ı (beyazlaşır) */
+        .player-button:hover, #lesson-select:hover { background-color: var(--button-hover-bg); transform: translateY(-1px); box-shadow: 0 4px #cdd3db; }
+        
+        /* Kural 2: Başla butonunun hover'ı (yeşil kalır, beyazlaşmaz) */
+        #start-game-btn:not(:disabled):hover {
+            background-color: var(--correct-color); /* Yeşil rengi koru */
+            color: white; /* Beyaz yazıyı koru */
+            transform: translateY(-1px); /* Hafifçe yükselme efekti kalsın */
+            box-shadow: 0 4px #cdd3db; /* Gölge efekti kalsın */
+        }
+        /* ---------- DEĞİŞİKLİK BURADA BİTİYOR ---------- */
+
         .player-button:active, #start-game-btn:not(:disabled):active { transform: translateY(1px); box-shadow: 0 2px #d8dee9; }
         .player-button.selected { background-color: var(--button-selected-bg); color: var(--button-selected-color); font-weight: bold; box-shadow: var(--button-selected-shadow); transform: none; }
         #lesson-select { width: 100%; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235E81AC'%3E%3Cpath d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 24px; padding-right: 40px; text-align-last: center; /* Firefox için */ }
         #start-game-btn { margin-top: 15px; font-size: 1.4rem; font-weight: bold; }
         #start-game-btn:disabled { background-color: #bdc3c7; color: #7f8c8d; opacity: 0.7; box-shadow: none; cursor: not-allowed; transform: none; }
-        #start-game-btn:not(:disabled) { background-color: var(--correct-color); color: white; animation: button-glow 1.5s infinite ease-in-out; }
+        #start-game-btn:not(:disabled) { background-color: var(--correct-color); color: white; }
 
         /* --- Oyun Ekranı (Öncekiyle Benzer) --- */
         .header-navigation { position: absolute; top: 10px; left: 10px; z-index: 200; }
@@ -95,7 +110,9 @@
         .win-buttons .icon-btn:hover svg { fill: var(--accent-color); }
 
         @keyframes pulse-glow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(94, 129, 172, 0.2)); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(94, 129, 172, 0.6));} }
-        @keyframes button-glow { 0%, 100% { box-shadow: 0 0 8px rgba(45, 220, 115, 0.5); } 50% { box-shadow: 0 0 20px rgba(45, 220, 115, 0.8); } }
+        
+        /* @keyframes button-glow { 0%, 100% { box-shadow: 0 0 8px rgba(45, 220, 115, 0.5); } 50% { box-shadow: 0 0 20px rgba(45, 220, 115, 0.8); } } */
+
 
         /* --- Media Queries --- */
         @media (max-width: 800px) {
@@ -180,14 +197,14 @@
                     title: { tr: "3. Ünite" }, description: { tr: "Evde" },
                     lessons: {
                         lesson1: { description: { tr: "Evdeyim" }, words: [ { id: 201, arabic: 'بَيْت', turkish: 'Ev' }, { id: 202, arabic: 'غُرْفَة', turkish: 'Oda' }, { id: 203, arabic: 'غُرْفَة النَّوْم', turkish: 'Yatak odası' }, { id: 204, arabic: 'غُرْفَة جُلوس', turkish: 'Oturma odası' }, { id: 205, arabic: 'مَطْبَخ', turkish: 'Mutfak' }, { id: 206, arabic: 'حَمّام', turkish: 'Banyo' }, { id: 207, arabic: 'سَرير', turkish: 'Yatak' }, { id: 208, arabic: 'طاوِلَة', turkish: 'Masa' }, { id: 209, arabic: 'كُرْسِيّ', turkish: 'Sandalye' }, { id: 210, arabic: 'تِلْفاز', turkish: 'Televizyon' }, { id: 211, arabic: 'ثَلّاجة', turkish: 'Buzdolabı' }, { id: 212, arabic: 'فُرْن', turkish: 'Fırın' }, { id: 213, arabic: 'سَجّادَة', turkish: 'Halı' }, { id: 214, arabic: 'هَاتِف', turkish: 'Telefon' }, { id: 215, arabic: 'مِصْباح', turkish: 'Lamba' } ] },
-                        lesson2: { description: { tr: "Odamda" }, words: [ { id: 216, arabic: 'غُرْفَتي', turkish: 'Odam' }, { id: 217, arabic: 'سَرير', turkish: 'Yatak' }, { id: 218, arabic: 'مَكْتَب', turkish: 'Çalışma masası' }, { id: 219, arabic: 'كُرْسِيّ', turkish: 'Sandalye' }, { id: 220, arabic: 'سِتارَة', turkish: 'Perde' }, { id: 221, arabic: 'مِصْباح', turkish: 'Lamba' }, { id: 222, arabic: 'مِرْآة', turkish: 'Ayna' }, { id: 223, arabic: 'سَجّادَة', turkish: 'Halı' }, { id: 224, arabic: 'دُولاب', turkish: 'Dolap' }, { id: 225, arabic: 'نَظيف', turkish: 'Temiz' }, { id: 226, arabic: 'مُرَتَّب', turkish: 'Düzenli' }, { id: 227, arabic: 'وَسِخ', turkish: 'Kirli' }, { id: 228, arabic: 'يُنَظِّفُ', turkish: 'Temizliyor' }, { id: 229, arabic: 'يُرَتِّبُ', turkish: 'Düzenliyor' } ] }
+                        lesson2: { description: { tr: "Odamda" }, words: [ { id: 216, arabic: 'غُرْfəti', turkish: 'Odam' }, { id: 217, arabic: 'سَرير', turkish: 'Yatak' }, { id: 218, arabic: 'مَكْتَب', turkish: 'Çalışma masası' }, { id: 219, arabic: 'كُرْسِيّ', turkish: 'Sandalye' }, { id: 220, arabic: 'سِتارَة', turkish: 'Perde' }, { id: 221, arabic: 'مِصْباح', turkish: 'Lamba' }, { id: 222, arabic: 'مِرْآة', turkish: 'Ayna' }, { id: 223, arabic: 'سَجّادَة', turkish: 'Halı' }, { id: 224, arabic: 'دُولاب', turkish: 'Dolap' }, { id: 225, arabic: 'نَظيف', turkish: 'Temiz' }, { id: 226, arabic: 'مُرَتَّب', turkish: 'Düzenli' }, { id: 227, arabic: 'وَسِخ', turkish: 'Kirli' }, { id: 228, arabic: 'يُنَظِّفُ', turkish: 'Temizliyor' }, { id: 229, arabic: 'يُرَتِّبُ', turkish: 'Düzenliyor' } ] }
                     }
                 },
                 unit4: {
                     title: { tr: "4. Ünite" }, description: { tr: "Bir Günüm" },
                     lessons: {
                         lesson1: { description: { tr: "Bir Günüm" }, words: [ { id: 301, arabic: 'صَباح', turkish: 'Sabah' }, { id: 302, arabic: 'ظُهْر', turkish: 'Öğle' }, { id: 303, arabic: 'مَساء', turkish: 'Akşam' }, { id: 304, arabic: 'لَيْل', turkish: 'Gece' }, { id: 305, arabic: 'يَسْتَيْقِظُ', turkish: 'Uyanıyor' }, { id: 306, arabic: 'يَغْسِلُ وَجْهَهُ', turkish: 'Yüzünü yıkıyor' }, { id: 307, arabic: 'يُصَلّي', turkish: 'Namaz kılıyor' }, { id: 308, arabic: 'يَلْبَسُ مَلابِسَهُ', turkish: 'Giyiniyor' }, { id: 309, arabic: 'يَتَناوَلُ الفَطور', turkish: 'Kahvaltı yapıyor' }, { id: 310, arabic: 'يَذْهَبُ إِلى المَدْرَسَة', turkish: 'Okula gidiyor' }, { id: 311, arabic: 'ُيَدْرُس', turkish: 'Ders çalışıyor' }, { id: 312, arabic: 'يَرْجِعُ إِلى البَيْت', turkish: 'Eve dönüyor' }, { id: 313, arabic: 'يَتَغَدّى', turkish: 'Öğle yemeği yiyor' }, { id: 314, arabic: 'يَسْتَريحُ', turkish: 'Dinleniyor' }, { id: 315, arabic: 'يَلْعَبُ', turkish: 'Oynuyor' } ] },
-                        lesson2: { description: { tr: "Günlük Rutin" }, words: [ { id: 316, arabic: 'أَسْتَيْقِظُ مُبَكِّرًا', turkish: 'Erken uyanıyorum' }, { id: 317, arabic: 'أَذْهَبُ إِلى المَدْرَسَة', turkish: 'Okula gidiyorum' }, { id: 318, arabic: 'أُصَلّي صَلاة الظُّهْر', turkish: 'Öğle namazı kılıyorum' }, { id: 319, arabic: 'أَتَغَدّى مَع أُسْرَتي', turkish: 'Ailemle öğle yemeği yiyorum' }, { id: 320, arabic: 'أَقْرَأُ دُروسي', turkish: 'Derslerimi okuyorum' }, { id: 321, arabic: 'أَكْتُبُ واجِباتي', turkish: 'Ödev yazıyorum' }, { id: 322, arabic: 'أَلْعَبُ في السّاحَة', turkish: 'Bahçede oynuyorum' }, { id: 323, arabic: 'أُساعِدُ أُمّي', turkish: 'Anneme yardım ediyorum' }, { id: 324, arabic: 'أَزورُ جَدِي', turkish: 'Dedemi ziyaret ediyorum' }, { id: 325, arabic: 'أَذْهَبُ إِلى المَسْجِد', turkish: 'Camiye gidiyorum' }, { id: 326, arabic: 'أُرَتِّبُ سَريري', turkish: 'Yatağımı düzeltiyorum' }, { id: 327, arabic: 'أُنَظِّفُ غُرْفَتي', turkish: 'Odamı temizliyorum' }, { id: 328, arabic: 'أُراجِعُ دُروسي', turkish: 'Derslerimi tekrar ediyorum' }, { id: 329, arabic: 'أَنامُ مُتَأَخِّرًا', turkish: 'Geç yatıyorum' } ] }
+                        lesson2: { description: { tr: "Günlük Rutin" }, words: [ { id: 316, arabic: 'أَسْتَيْقِظُ مُبَكِّرًا', turkish: 'Erken uyanıyorum' }, { id: 317, arabic: 'أَذْهَبُ إِلى المَدْرَسَة', turkish: 'Okula gidiyorum' }, { id: 318, arabic: 'أُصَلّي صَلاة الظُّهْر', turkish: 'Öğle namazı kılıyorum' }, { id: 319, arabic: 'أَتَغَدّى مَع أُسْرəti', turkish: 'Ailemle öğle yemeği yiyorum' }, { id: 320, arabic: 'أَقْرَأُ دُروسي', turkish: 'Derslerimi okuyorum' }, { id: 321, arabic: 'أَكْتُبُ واجِباتي', turkish: 'Ödev yazıyorum' }, { id: 322, arabic: 'أَلْعَبُ في السّاحَة', turkish: 'Bahçede oynuyorum' }, { id: 323, arabic: 'أُساعِدُ أُمّي', turkish: 'Anneme yardım ediyorum' }, { id: 324, arabic: 'أَزورُ جَدِي', turkish: 'Dedemi ziyaret ediyorum' }, { id: 325, arabic: 'أَذْهَبُ إِلى المَسْجِد', turkish: 'Camiye gidiyorum' }, { id: 326, arabic: 'أُرَتِّبُ سَريري', turkish: 'Yatağımı düzeltiyorum' }, { id: 327, arabic: 'أُنَظِّفُ غُرْfəti', turkish: 'Odamı temizliyorum' }, { id: 328, arabic: 'أُراجِعُ dərslərimi', turkish: 'Derslerimi tekrar ediyorum' }, { id: 329, arabic: 'أَنامُ مُتَأَخِّرًا', turkish: 'Geç yatıyorum' } ] }
                     }
                 }
             }
@@ -205,7 +222,7 @@
                 unit2: {
                     title: { tr: "2. Ünite" }, description: { tr: "Kendimi Keşfediyorum" },
                     lessons: {
-                        lesson1: { description: { tr: "Ben Kimim?" }, words: [ { id: 501, arabic: 'مَن أَنا؟', turkish: 'Ben kimim?' }, { id: 502, arabic: 'اِسْم', turkish: 'İsim' }, { id: 503, arabic: 'عُمْر', turkish: 'Yaş' }, { id: 504, arabic: 'مِهْنَة', turkish: 'Meslek' }, { id: 505, arabic: 'هِوايَة', turkish: 'Hobi' }, { id: 506, arabic: 'مَوْهِبَة', turkish: 'Yetenek' }, { id: 507, arabic: 'طَيِّب', turkish: 'İyi kalpli' }, { id: 508, arabic: 'مُجْتَهِد', turkish: 'Çalışkan' }, { id: 509, arabic: 'كَسول', turkish: 'Tembel' }, { id: 510, arabic: 'هادِئ', turkish: 'Sakin' }, { id: 511, arabic: 'نَشيط', turkish: 'Enerjik' }, { id: 512, arabic: 'مُبْتَسِم', turkish: 'Güleryüzlü' }, { id: 513, arabic: 'صَبور', turkish: 'Sabırlı' }, { id: 514, arabic: 'أَحْلامي', turkish: 'Hayallerim' }, { id: 515, arabic: 'مُسْتَقْبَل', turkish: 'Gelecek' } ] },
+                        lesson1: { description: { tr: "Ben Kimim?" }, words: [ { id: 501, arabic: 'مَن أَنا؟', turkish: 'Ben kimim?' }, { id: 502, arabic: 'اِسْم', turkish: 'İsim' }, { id: 503, arabic: 'عُمْر', turkish: 'Yaş' }, { id: 504, arabic: 'مِهْنَة', turkish: 'Meslek' }, { id: 505, arabic: 'هِوايَة', turkish: 'Hobi' }, { id: 506, arabic: 'مَوْهِBə', turkish: 'Yetenek' }, { id: 507, arabic: 'طَيِّب', turkish: 'İyi kalpli' }, { id: 508, arabic: 'مُجْتَهِد', turkish: 'Çalışkan' }, { id: 509, arabic: 'كَسول', turkish: 'Tembel' }, { id: 510, arabic: 'هادِئ', turkish: 'Sakin' }, { id: 511, arabic: 'نَشيط', turkish: 'Enerjik' }, { id: 512, arabic: 'مُبْتَسِم', turkish: 'Güleryüzlü' }, { id: 513, arabic: 'صَبور', turkish: 'Sabırlı' }, { id: 514, arabic: 'أَحْلامي', turkish: 'Hayallerim' }, { id: 515, arabic: 'مُسْتَقْبَل', turkish: 'Gelecek' } ] },
                         lesson2: { description: { tr: "Hobilerim" }, words: [ { id: 516, arabic: 'قِراءَة', turkish: 'Okuma' }, { id: 517, arabic: 'كِتابَة', turkish: 'Yazma' }, { id: 518, arabic: 'رَسْم', turkish: 'Resim yapma' }, { id: 519, arabic: 'طَبْخ', turkish: 'Yemek pişirme' }, { id: 520, arabic: 'تَصْوير', turkish: 'Fotoğrafçılık' }, { id: 521, arabic: 'رِياضَة', turkish: 'Spor' }, { id: 522, arabic: 'كُرَة القَدَم', turkish: 'Futbol' }, { id: 523, arabic: 'كُرَة السَّلَّة', turkish: 'Basketbol' }, { id: 524, arabic: 'سَفَر', turkish: 'Seyahat' }, { id: 525, arabic: 'طَبيعَة', turkish: 'Doğa' }, { id: 526, arabic: 'أَفْلام', turkish: 'Filmler' }, { id: 527, arabic: 'موسيقى', turkish: 'Müzik' }, { id: 528, arabic: 'مَكْتَبَة', turkish: 'Kütüphane' }, { id: 529, arabic: 'في الوَقْت الفارِغ', turkish: 'Boş zamanlarda' }, { id: 530, arabic: 'مُفيد', turkish: 'Faydalı' }, { id: 531, arabic: 'مُمْتِع', turkish: 'Eğlenceli' } ] }
                     }
                 },
@@ -246,15 +263,34 @@
             lessonSelect: document.getElementById('lesson-select'),
             startGameBtn: document.getElementById('start-game-btn'),
         },
+        
         init() {
-            this.initAudio();
+            // this.initAudio(); // Orijinal çağrıyı kaldırın veya yorum satırı yapın
+
             this.loadProgress(); // İlerlemeyi yükle
             this.populateLessonSelector(); // Dersleri doldur
             this.initStartScreenListeners(); // Başlangıç ekranı butonları
             this.initNavigation(); // Oyun içi navigasyon (geri/tekrar oyna)
             MemoryGame.init();
+
+            // --- YENİ EKLENEN BÖLÜM: Sesi ilk dokunuşta başlat ---
+            // Sesi başlatmak için ilk kullanıcı etkileşimini (tıklama veya dokunma) dinle
+            const initAudioOnFirstInteraction = () => {
+                if (this.state.isAudioInitialized) return; // Zaten başlatıldıysa tekrar yapma
+                
+                this.initAudio(); // Orijinal ses başlatma fonksiyonunu çağır
+                
+                // Dinleyiciyi bir kez çalıştıktan sonra kaldır
+                document.removeEventListener('click', initAudioOnFirstInteraction);
+                document.removeEventListener('touchstart', initAudioOnFirstInteraction);
+            };
+            document.addEventListener('click', initAudioOnFirstInteraction);
+            document.addEventListener('touchstart', initAudioOnFirstInteraction);
+            // --- YENİ EKLENEN BÖLÜM SONU ---
+            
             this.showScreen('start-screen'); // Başlangıç ekranını göster
         },
+        
         showScreen(screenId) {
             this.dom.screens.forEach(screen => screen.classList.remove('active'));
             const targetScreen = document.getElementById(screenId);
